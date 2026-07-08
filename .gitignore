@@ -19,3 +19,12 @@ endpoint-data
 
 # OS
 .DS_Store
+
+# cleanup script
+cleanup-test-data.js
+
+# test bash scripts
+test-creator-cards.sh
+
+# test results
+results.txt

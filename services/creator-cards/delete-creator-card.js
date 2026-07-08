@@ -36,12 +36,12 @@ async function deleteCreatorCard(serviceData, options = {}) {
       throwAppError(CreatorCardMessages.CARD_NOT_FOUND, 'NF01');
     }
 
-    // Step 3: Soft-delete by setting deleted timestamp
+    // Step 3: Soft-delete using the repository's deleteOne (which mutates unique fields
+    // like slug to free them in the unique index — e.g. slug becomes "&del:{ts}-slug")
     const now = Date.now();
 
-    await CreatorCard.updateOne({
+    await CreatorCard.deleteOne({
       query: { _id: card._id },
-      updateValues: { deleted: now },
     });
 
     // Step 4: Return full card with deleted timestamp set
